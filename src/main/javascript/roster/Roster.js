@@ -27,7 +27,7 @@ Xmpp4Js.Roster.Roster = function( con ) {
     this.con = con;
 
     
-    this.con.addPacketListener( this.rosterItemManager.rosterPacketListener.bind(this.rosterItemManager), new Xmpp4Js.PacketFilter.PacketClassFilter( Xmpp4Js.Packet.RosterPacket ) );
+    this.con.addPacketListener( this.rosterItemManager.rosterPacketListener.bind(this.rosterItemManager), new Xmpp4Js.PacketFilter.IQQueryNSFilter( "jabber:iq:roster" ) );
     this.con.addPacketListener( this.rosterItemManager.rosterSubSyncPacketListener.bind(this.rosterItemManager), new Xmpp4Js.PacketFilter.PacketClassFilter( Xmpp4Js.Packet.Presence ) );
     
     this.con.addPacketListener( this.presenceManager.presencePacketListener.bind(this.presenceManager), new Xmpp4Js.PacketFilter.PacketClassFilter( Xmpp4Js.Packet.Presence ) );
@@ -39,7 +39,7 @@ Xmpp4Js.Roster.Roster.prototype = {
     reload: function() {
         var iq = this.con.getPacketHelper().createIQ( null, "get", "jabber:iq:roster" );
         
-        this.con.send( iq );    
+        this.con.send( iq );
     },
     
     /**

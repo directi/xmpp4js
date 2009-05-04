@@ -3,13 +3,15 @@ var Xmpp4Js = {};
 
 
 Xmpp4Js.logLevel = Log4js.Level.ALL;
-Xmpp4Js.appender = new Log4js.ConsoleAppender();
+//Xmpp4Js.appender = new Log4js.JSAlertAppender();
+Xmpp4Js.appenderConsole = new Log4js.BrowserConsoleAppender();
 Xmpp4Js.loggers = [];
 
 Xmpp4Js.createLogger = function(logId) {
     var logger = Log4js.getLogger( logId ); 
     logger.setLevel( Xmpp4Js.logLevel ); 
-    logger.addAppender( Xmpp4Js.appender );
+    //logger.addAppender( Xmpp4Js.appender );
+    logger.addAppender( Xmpp4Js.appenderConsole );
 
     Xmpp4Js.loggers.push( logger );
     

@@ -65,26 +65,27 @@ Xmpp4Js.PacketListenerManager.prototype = {
                         wrapper.listener( packetNode );
                     }
                 } else {
-                    for( var j = 0; j < packetNode.childNodes.getLength(); j++ ) {
+                /*    for( var j = 0; j < packetNode.childNodes.getLength(); j++ ) {
                         var node = packetNode.childNodes.item(j);
-                        
+                */        
                         // if it's not a normal element ignore it
+						node = packetNode;
                         if( node.nodeType != 1 /* ELEMENT - are there cross-browser constants? */) {
                             continue;
                         }
 
                         // FIXME this seems it should be jabber:client, but server impls differ
-                        if( node.namespaceURI == "http://jabber.org/protocol/httpbind" 
+                    /*    if( node.namespaceURI == "http://jabber.org/protocol/httpbind" 
                             || node.namespaceURI == "jabber:client" ) {
-                        
+                    */    
                             var stanza = this.stanzaProvider.fromNode( node );
 
-                            if( wrapper.filter.accept(stanza) ) {
+                            if( wrapper.filter.accept( stanza ) ) {
                                 wrapper.listener( stanza );
                             }
-                        } else {
+                    /*    } else {
                         }
-                    }	
+                    } */	
                 }
             } catch( e ) {
 ;;;           Xmpp4Js.PacketListenerManager.logger.error( "Error running packet listener");
